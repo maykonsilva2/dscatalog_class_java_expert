@@ -62,7 +62,7 @@ public class Category implements Serializable {
 
 }
 
-
+// stop aula 8 proxima aula 9
 /*
     Esse é um construtor padrão, Este construtor não faz nada e não aceita nenhum argumento. Ele simplesmente permite que você crie um objeto Category sem inicializar os campos id e name.
 
