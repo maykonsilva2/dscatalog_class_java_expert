@@ -1,10 +1,22 @@
 package com.devsuperior.dscatalog.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_category")
 public class Category implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -106,4 +118,27 @@ public class Category implements Serializable {
  * vá na classe e clique com o botão direito>Source Action>Generate Serial
  * Version UID
  * ou Pressione ctrl+shift+P e digite "Java: Generate Serial Version UID"
+ * 
+ * @Serial
+ * - A anotação @Serial foi introduzida no Java 14 para marcar explicitamente
+ * elementos relacionados à serialização. Ela é usada para indicar que um campo
+ * ou método está relacionado ao processo de serialização. No seu exemplo, a
+ * anotação @Serial é usada para marcar o campo serialVersionUID.
+ * 
+ * 
+ * @Entity
+ * - A anotação @Entity ela informa ao JPA que uma classe é uma entidade,
+ * significa qie a classe representa um TABELA no banco de dados e cada
+ * instância da classe representa uma LINHA nessa tabela.
+ * 
+ * @Table
+ * - Caso a tabela possua um nome diferente, podemos estabelecer esse mapeamento
+ * com a anotação @Table
+ * 
+ * @Id
+ * - Anotação @Id: Indica o campo id como a chave primária.
+ * 
+ * @GeneratedValue
+ * - Anotação @GeneratedValue: Especifica que o valor do id será gerado
+ * automaticamente pelo banco de dados.
  */

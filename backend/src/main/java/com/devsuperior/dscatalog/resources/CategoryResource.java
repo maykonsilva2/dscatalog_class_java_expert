@@ -1,26 +1,26 @@
 package com.devsuperior.dscatalog.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
 
+    @Autowired
+    private CategoryService service;
+
     @GetMapping
     public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = new ArrayList<>();
-
-        list.add(new Category(1L, "Books"));
-        list.add(new Category(2L, "Electronics"));
-
+        List<Category> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
@@ -64,4 +64,22 @@ public class CategoryResource {
  * - ResponseEntity.status(HttpStatus): Método que retorna uma resposta com um
  * código HTTP específico.
  * - ResponseEntity.ok().body(): Método que retorna o corpo da resposta.
+ * 
+ * 
+ * 
+ * Usando injenção de dependência para acessar o serviço CategoryService, para pegar a lista de categorias.
+    ```java
+    @Autowired
+    private CategoryService service;
+
+    @GetMapping
+    public ResponseEntity<List<Category>> findAll() {
+        List<Category> list = service.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+    ```
+    - Onde @Autowired é uma anotação que indica que a instância de CategoryService será injetada automaticamente pelo Spring.
+    - O método findAll() chama o método findAll() do serviço CategoryService e retorna a lista de categorias.
+    - ResponseEntity.ok().body(list) retorna uma resposta de sucesso com a lista de categorias no corpo da resposta.
+    - Com isso seguimos a a arquitetura RESTful, aonde o CONTROLADOR REST é responsável por receber as requisições, ae a camada de serviço é responsável por realizar a lógica de negócio, e a camada de acesso a dados é responsável por acessar o banco de dados.
  */
